@@ -1,2 +1,2 @@
-export * from './schemaValidation/auth'
+export * from './validators/auth'
 export * from './helpers/functions'

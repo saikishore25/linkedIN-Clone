@@ -4,7 +4,7 @@ import { FirebaseError } from 'firebase/app'
 import { sendPasswordResetEmail } from 'firebase/auth'
 import { toast } from 'react-toastify'
 import { auth } from '../config/firebase'
-import { ForgotPasswordSchemaValidation } from '../utils/schemaValidation/auth'
+import { ForgotPasswordSchemaValidation } from '../utils/validators/auth'
 import Button from '../components/UI/Button'
 import CustomInput from '../components/UI/CustomInput'
 
