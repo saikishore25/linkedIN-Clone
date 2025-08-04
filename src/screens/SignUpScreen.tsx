@@ -28,13 +28,7 @@ const SignUpScreen = () => {
 
 			const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password)
 
-            if(auth.currentUser){
-
-                await updateProfile(auth.currentUser, {
-                    displayName: data.name,
-                    photoURL: data.imageUrl || 'https://img.freepik.com/premium-vector/businessman-avatar-cartoon-character-profile_18591-50581.jpg',
-                });
-            }
+            
 			const user = userCredential.user;
 
             await setDoc(doc(db, 'users', user.uid), {
