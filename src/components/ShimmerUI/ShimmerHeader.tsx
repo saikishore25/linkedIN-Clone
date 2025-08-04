@@ -18,7 +18,7 @@ const ShimmerHeader = () => {
                         <div className="block lg:hidden w-8 h-8 bg-gray-300 shimmer rounded-full"></div>
 
                         {/* Desktop Header Option Icons shimmer */}
-                        <div className="flex items-center space-x-6 hidden lg:flex">
+                        <div className="flex items-center space-x-6  lg:flex">
                             <div className="w-8 h-8 bg-gray-300 shimmer rounded-full"></div>
                             <div className="w-8 h-8 bg-gray-300 shimmer rounded-full"></div>
                             <div className="w-8 h-8 bg-gray-300 shimmer rounded-full"></div>

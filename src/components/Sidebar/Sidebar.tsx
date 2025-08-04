@@ -3,7 +3,6 @@ import { MdEvent } from 'react-icons/md'
 import { HiOfficeBuilding } from 'react-icons/hi'
 import { FiBell } from 'react-icons/fi'
 import { BsPeople } from 'react-icons/bs'
-
 import Card from '../UI/Card'
 import { auth } from '../../config/firebase'
 import SidebarStar from './SidebarStar'
