@@ -3,7 +3,7 @@ import Post from './Post'
 import PostInput from './PostInput'
 import FlipMove from 'react-flip-move'
 import { PostResponseType } from '../../types'
-import {collection, getDocs, limit, onSnapshot, orderBy, query} from 'firebase/firestore'
+import {collection, limit, onSnapshot, orderBy, query} from 'firebase/firestore'
 import { db } from '../../config/firebase'
 
 const Feed = ()=>{
