@@ -6,7 +6,8 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import Button from '../components/UI/Button'
 import { SlArrowRight } from 'react-icons/sl'
 import CustomInput from '../components/UI/CustomInput'
-import { auth, createUserWithEmailAndPassword, updateProfile } from '../config/firebase'
+import { auth, createUserWithEmailAndPassword, updateProfile, db  } from '../config/firebase'
+import {doc, setDoc}  from 'firebase/firestore'
 import { FirebaseError } from 'firebase/app'
 import OAuth from '../components/UI/OAuth'
 import { toast } from 'react-toastify'
@@ -27,20 +28,29 @@ const SignUpScreen = () => {
 
 			const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password)
 
-			if(auth?.currentUser){
+            if(auth.currentUser){
 
-				await updateProfile(auth.currentUser, {
+                await updateProfile(auth.currentUser, {
+                    displayName: data.name,
+                    photoURL: data.imageUrl || 'https://img.freepik.com/premium-vector/businessman-avatar-cartoon-character-profile_18591-50581.jpg',
+                });
+            }
+			const user = userCredential.user;
 
-					displayName: data?.name,
-					photoURL: data?.imageUrl || 'https://img.freepik.com/premium-vector/businessman-avatar-cartoon-character-profile_18591-50581.jpg',
-				})
-			}
+            await setDoc(doc(db, 'users', user.uid), {
+
+                uid: user.uid,
+                name: data.name,
+                email: data.email,
+                photoURL: data.imageUrl || 'https://img.freepik.com/premium-vector/businessman-avatar-cartoon-character-profile_18591-50581.jpg',
+                createdAt: new Date()
+            });
 
 			console.log('Signed in', userCredential)
 
 			toast.success('Sign up was successful')
 			reset()
-			navigate('/login')
+			navigate('/')
 
 		} 
         
@@ -48,7 +58,7 @@ const SignUpScreen = () => {
 
 			const firebaseError = error as FirebaseError
 			console.error(firebaseError.message)
-			toast.error('Something went wrong with the registration')
+			toast.error(firebaseError.message || 'Something went wrong with the registration')
 		}
 
 	}
@@ -118,7 +128,7 @@ const SignUpScreen = () => {
 
                         <div>
                             <p className="text-sm">
-                                By clicking Agree & Join, you agree to the LinkedIn (Saddam)
+                                By clicking Agree & Join, you agree to the LinkedIn
                                 <span className="text-customBlue-950 hover:underline transition dark:text-white">
                                     {' '}User Agreement{' '}
                                 </span>
